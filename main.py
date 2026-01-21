@@ -163,6 +163,19 @@ def get_db_connection():
 #    Request: {"message": "Add a new task to buy groceries", "user_id": "uuid"}
 #    Response: {"response": "I'll help you add a task...", "action_taken": "suggest_create_task", "suggested_action": "create_task_form"}
 
+# Root endpoint - Required for Railway health checks
+@app.get("/")
+def root():
+    """
+    Root endpoint for health checks and service verification
+    """
+    return {
+        "message": "TaskFlow API is running!",
+        "status": "healthy",
+        "version": "1.0.0",
+        "docs": "/docs"
+    }
+
 # Health check endpoint
 @app.get("/health", response_model=HealthCheck)
 def health_check():
